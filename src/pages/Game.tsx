@@ -4,7 +4,7 @@ const Square = ({ ...props }: React.HTMLAttributes<HTMLButtonElement>) => {
   return (
     <button
       className="w-16 h-16 shadow-md rounded-lg transition bg-gray-300 flex items-center justify-center text-2xl font-bold"
-      {...props} // Destructuring the given proops.
+      {...props}
     >
       {props.children}
     </button>
@@ -14,17 +14,23 @@ const Square = ({ ...props }: React.HTMLAttributes<HTMLButtonElement>) => {
 function Game() {
   const [squares, setSquares] = useState<Array<string | null>>(
     Array(9).fill(null)
-  ); // 9 squares, initially empty
-  const [isXNext, setIsXNext] = useState(true); // Determines if it's X's turn
-  const winner = calculateWinner(squares); // Check if there's a winner
+  ); // 9 Square, null initialized.
+  const [isXNext, setIsXNext] = useState(true); // Tracks current player (X or O)
+  const winner = calculateWinner(squares); // Determine the winner
+  const isDraw = squares.every((square) => square !== null) && !winner; // Check if the game is a draw
 
   const handleClick = (index: number) => {
-    if (squares[index] || winner) return; // Prevent further moves if square is filled or game is over
+    if (squares[index] || winner) return; // Prevent clicks if square is filled or game is over
 
-    const nextSquares = squares.slice(); // Create a copy of the squares
-    nextSquares[index] = isXNext ? "X" : "O"; // Update the clicked square
+    const nextSquares = squares.slice(); // Copy squares
+    nextSquares[index] = isXNext ? "X" : "O"; // Mark "X" or "O"
     setSquares(nextSquares); // Update state
-    setIsXNext(!isXNext); // Switch turns
+    setIsXNext(!isXNext); // Switch turn
+  };
+
+  const resetGame = () => {
+    setSquares(Array(9).fill(null)); // Clear the grid
+    setIsXNext(true); // Reset to Player X's turn
   };
 
   return (
@@ -38,8 +44,16 @@ function Game() {
         ))}
       </div>
       <div className="mt-4 text-xl">
-        {winner ? `Winner: ${winner}` : `Next player: ${isXNext ? "X" : "O"}`}
+        {winner && `Winner: ${winner}`}
+        {isDraw && "It's a Draw!"}
+        {!winner && !isDraw && `Next player: ${isXNext ? "X" : "O"}`}
       </div>
+      <button
+        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600"
+        onClick={resetGame}
+      >
+        Reset Game
+      </button>
     </div>
   );
 }
@@ -62,7 +76,7 @@ function calculateWinner(squares: Array<string | null>) {
       return squares[a]; // Return the winner (X or O)
     }
   }
-  return null; // No winner yet
+  return null; // No winner
 }
 
 export default Game;

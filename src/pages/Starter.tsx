@@ -33,28 +33,37 @@ function Starter() {
 
       {/* Card Section */}
       <div className="bg-white shadow-md rounded-lg p-6 mb-6">
-        <button
-          onClick={() => setCount((count) => count + 1)}
-          className={`px-4 py-2 rounded-lg transition ${
-            count >= 20
-              ? "bg-green-500 hover:bg-green-600"
-              : count >= 10
-              ? "bg-red-500 hover:bg-red-600"
-              : "bg-blue-500 hover:bg-blue-600"
-          } text-white`}
-        >
-          Count is {count}
-        </button>
-        <p className="text-gray-600 mt-4">
+        <div className="flex justify-between items-center">
+          <button
+            onClick={() => setCount((count) => count + 1)}
+            className={`px-4 py-2 rounded-lg transition ${
+              count >= 20
+                ? "bg-green-500 hover:bg-green-600"
+                : count >= 10
+                ? "bg-red-500 hover:bg-red-600"
+                : "bg-blue-500 hover:bg-blue-600"
+            } text-white`}
+          >
+            Click Me
+          </button>
+          <p className="content-center">Counter: {count}</p>
+        </div>
+
+        <p className="text-gray-600 mt-4 mb-2">
           Edit <code className="bg-gray-200 px-1 rounded">src/App.tsx</code> and
           save to test HMR
         </p>
+        <hr />
+        <div className="flex mt-2">
+          <button className="px-4 py-2 rounded-lg transition bg-green-500 text-white">
+            <Link to="/Game">Tic Tac Toe</Link>
+          </button>
+        </div>
       </div>
 
       {/* Footer Section */}
       <p className="text-sm text-gray-500">
         Click on the Vite and React logos to learn more,{" "}
-        <Link to="/Game">Go to Game</Link>
       </p>
     </div>
   );

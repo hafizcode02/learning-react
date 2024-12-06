@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Square = ({ ...props }: React.HTMLAttributes<HTMLButtonElement>) => {
   return (
@@ -33,6 +34,8 @@ function Game() {
     setIsXNext(true); // Reset to Player X's turn
   };
 
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center gap-6">
       <h1 className="text-3xl font-bold mb-4">Tic Tac Toe</h1>
@@ -48,12 +51,20 @@ function Game() {
         {isDraw && "It's a Draw!"}
         {!winner && !isDraw && `Next player: ${isXNext ? "X" : "O"}`}
       </div>
-      <button
-        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600"
-        onClick={resetGame}
-      >
-        Reset Game
-      </button>
+      <div className="flex">
+        <button
+          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 mr-3"
+          onClick={() => navigate(-1)}
+        >
+          Back
+        </button>
+        <button
+          className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-blue-600"
+          onClick={resetGame}
+        >
+          Reset Game
+        </button>
+      </div>
     </div>
   );
 }

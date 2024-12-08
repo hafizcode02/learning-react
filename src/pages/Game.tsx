@@ -1,16 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const Square = ({ ...props }: React.HTMLAttributes<HTMLButtonElement>) => {
-  return (
-    <button
-      className="w-16 h-16 shadow-md rounded-lg transition bg-gray-300 flex items-center justify-center text-2xl font-bold"
-      {...props}
-    >
-      {props.children}
-    </button>
-  );
-};
+import GameButton from "../components/GameButton";
 
 function Game() {
   const [squares, setSquares] = useState<Array<string | null>>(
@@ -41,9 +31,9 @@ function Game() {
       <h1 className="text-3xl font-bold mb-4">Tic Tac Toe</h1>
       <div className="grid grid-cols-3 gap-2">
         {squares.map((square, index) => (
-          <Square key={index} onClick={() => handleClick(index)}>
+          <GameButton key={index} onClick={() => handleClick(index)}>
             {square}
-          </Square>
+          </GameButton>
         ))}
       </div>
       <div className="mt-4 text-xl">

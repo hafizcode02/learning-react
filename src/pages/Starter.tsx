@@ -1,10 +1,11 @@
 import { useState } from "react";
 import reactLogo from "../assets/react.svg";
 import viteLogo from "/vite.svg";
-import { Link } from "react-router-dom";
+import CountButton from "../components/CountButton";
+import NavButton from "../components/NavButton";
 
 function Starter() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0); // State for the counter
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
@@ -34,7 +35,11 @@ function Starter() {
       {/* Card Section */}
       <div className="bg-white shadow-md rounded-lg p-6 mb-6">
         <div className="flex justify-between items-center">
-          <button
+          <CountButton
+            onClick={() => setCount(() => count + 1)}
+            count={count}
+          />{" "}
+          {/* <button
             onClick={() => setCount((count) => count + 1)}
             className={`px-4 py-2 rounded-lg transition ${
               count >= 20
@@ -45,7 +50,7 @@ function Starter() {
             } text-white`}
           >
             Click Me
-          </button>
+          </button> */}
           <p className="content-center">Counter: {count}</p>
         </div>
 
@@ -55,9 +60,9 @@ function Starter() {
         </p>
         <hr />
         <div className="flex mt-2">
-          <button className="px-4 py-2 rounded-lg transition bg-green-500 text-white">
-            <Link to="/Game">Tic Tac Toe</Link>
-          </button>
+          <NavButton urlTo="/Game" placeholder="Tic-Tac-Toe" />
+          <NavButton urlTo="/" placeholder="Simple Card Generator" />
+          <NavButton urlTo="/" placeholder="To-Do List" />
         </div>
       </div>
 

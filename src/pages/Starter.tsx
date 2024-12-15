@@ -61,8 +61,8 @@ function Starter() {
         <hr />
         <div className="flex mt-2">
           <NavButton urlTo="/Game" placeholder="Tic-Tac-Toe" />
-          <NavButton urlTo="/" placeholder="Simple Card Generator" />
-          <NavButton urlTo="/" placeholder="To-Do List" />
+          <NavButton urlTo="/CardGenerator" placeholder="Simple Card Generator" />
+          <NavButton urlTo="/TodoList" placeholder="To-Do List" />
         </div>
       </div>
 

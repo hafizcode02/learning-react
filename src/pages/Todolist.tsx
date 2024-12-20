@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useNavigate } from "react-router-dom";
 
 interface Todo {
   id: number;
@@ -14,8 +15,10 @@ function TodoList() {
   const [newTodo, setNewTodo] = useState("");
   const [editTodo, setEditTodo] = useState("");
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    // Load todos from localStorage
+    // Load todos from localStorage | just running once after component mounted
     const todos = localStorage.getItem("todos");
     if (todos) {
       setTodos(JSON.parse(todos));
@@ -23,11 +26,11 @@ function TodoList() {
   }, []);
 
   useEffect(() => {
-    // Save todos to localStorage
+    // Save todos to localStorage | run everytime todos changed
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
-  const addTodo = (e: React.FormEvent) => {
+  const addTodo = (e: React.FormEvent) => { // add new todo
     e.preventDefault();
     if (!newTodo.trim()) return;
     setTodos([
@@ -39,7 +42,7 @@ function TodoList() {
         isEditing: false,
       },
     ]);
-    setNewTodo("");
+    setNewTodo(""); // clear input
   };
 
   const toggleTodo = (id: number) => {
@@ -80,6 +83,14 @@ function TodoList() {
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full mx-auto p-6 bg-white rounded-lg shadow-xl">
+      <Button
+          type="button"
+          variant="outline"
+          className="bg-blue-500 text-white hover:bg-white"
+          onClick={() => navigate(-1)}
+        >
+          {"Back"}
+        </Button>
         <h1 className="text-2xl font-bold mb-4 text-center">
           Simple To-Do List
         </h1>

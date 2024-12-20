@@ -87,7 +87,7 @@ function TodoList() {
           type="button"
           variant="outline"
           className="bg-blue-500 text-white hover:bg-white"
-          onClick={() => navigate(-1)}
+          onClick={() => navigate("/")}
         >
           {"Back"}
         </Button>
